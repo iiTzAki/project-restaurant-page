@@ -8,7 +8,9 @@ import romanceBox from "./assets/images/TheRomanceBox.png";
 function LoadMenuPage() { 
 
     const getContentDiv = document.getElementById('content'); 
-    const menuFilterContainer = document.createElement('div'); 
+    const sectionContainer = document.createElement('div');
+    const menuFilterContainer = document.createElement('div');
+    sectionContainer.className = "menu-container"; 
     menuFilterContainer.className = "menu-filter-container"; 
 
     // Nav Menu Section 
@@ -16,10 +18,14 @@ function LoadMenuPage() {
     navMenuWrapper.className = "menu-nav-links"; 
 
     const linkNames = ["Special Offers", "Populars", "Donuts", "Cakes", "Cookies", "Pastries", "Beverages"];  
-    linkNames.forEach((value) => { 
+    linkNames.forEach((value, index) => { 
         const newButton = document.createElement('button'); 
         newButton.className = "menu-link"; 
-        newButton.textContent = value; 
+        newButton.textContent = value;
+        
+        if (index === 0) { 
+            newButton.classList.add("active"); 
+        }
 
         navMenuWrapper.appendChild(newButton); 
     })
@@ -34,25 +40,25 @@ function LoadMenuPage() {
         {
             foodName: "The Half Dozen", 
             description: "Mix and match any six of our house-baked creations into your own custom box.", 
-            priceTag: "14.99", 
+            priceTag: "$16.50", 
             imageSrc: halfDozen, 
         }, 
         {
             foodName: "Le Goûter", 
-            description: "A freshly baked, flaky pastry served alongside a rich morning brew.", 
-            priceTag: "14.99", 
+            description: "A flaky, freshly baked pastry served with fruit preserves and a rich morning brew.", 
+            priceTag: "$7.50", 
             imageSrc: leGouter,             
         }, 
         {
             foodName: "The Espresso Macaron", 
             description: "An authentic taste of France with Espresso macarons and velvet espresso.", 
-            priceTag: "14.99", 
+            priceTag: "$6.80", 
             imageSrc: espressoMacaron,             
         }, 
         {
             foodName: "Two of a Kind", 
-            description: "A synchronized pairing of any two signature hot brews.", 
-            priceTag: "14.99", 
+            description: "A synchronized pairing of any two signature hot brews, crafted for sharing.", 
+            priceTag: "$9.00", 
             imageSrc: twoOfAKind,             
         }, 
         {
@@ -85,7 +91,6 @@ function LoadMenuPage() {
         
         const textContentWrapper = document.createElement('div');
         const ctaWrapper = document.createElement('div'); 
-        // textContentWrapper.className = "food-box-wrapper";
         ctaWrapper.className = "cta-container";  
 
         const boxHeader = document.createElement('h2'); 
@@ -115,8 +120,26 @@ function LoadMenuPage() {
 
     })
 
-    getContentDiv.append(menuFilterContainer, foodContainer);
+    sectionContainer.append(menuFilterContainer, foodContainer);
+    getContentDiv.appendChild(sectionContainer)
+
+    function eventHandlers() { 
+
+        const getMenuNavLinks = document.querySelector('.menu-nav-links');
+        getMenuNavLinks.addEventListener('click', (e) => { 
+
+            if (e.target.classList.contains('menu-link')) { 
+                e.target.closest(".menu-nav-links").querySelectorAll('.menu-link').forEach(btn => {btn.classList.remove('active')})
+                e.target.classList.add('active')
+            }
+
+        })
+
+    }    
+
+    eventHandlers()
 
 }
+
 
 export { LoadMenuPage }

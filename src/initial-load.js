@@ -2,7 +2,9 @@ import DonutImage from "./assets/images/donut-image.png";
 
 function LoadInitialPage() { 
 
-    const getContentDiv = document.getElementById("content");   
+    const getContentDiv = document.getElementById("content");
+    const sectionContainer = document.createElement('div'); 
+    sectionContainer.className = "home-container";    
 
     // Load Hero Section 
     const heroSectionContainer = document.createElement("div"); 
@@ -20,7 +22,7 @@ function LoadInitialPage() {
     headingOne.textContent = "Taste the";
     headingTwo.textContent = "Solaria Moon";
     heroParagraph.textContent = 
-        "After A Long Day Exploring The Stars, Ending Your Day With Solaria Is Pure Bliss"
+        "Rich layers, sweet glazes, and fresh-baked favorites ready to make your day."
 
     const donutWrapper = document.createElement("div"); 
     donutWrapper.className = "donut-image";
@@ -48,7 +50,7 @@ function LoadInitialPage() {
             { 
                 headingText: "Dawn Baked", 
                 specialClass: "cake", 
-                para: "Prepared at first light so every batch arrives fresh for the morning.",
+                para: "Prepared at first light so every batch reaches your table with morning-fresh warmth and crispness.",
             },
             { 
                 headingText: "Hand Crafted", 
@@ -76,8 +78,8 @@ function LoadInitialPage() {
     createIngredientWidgets();
 
     widgetContainer.append(ingredientsContainer);
-    getContentDiv.appendChild(heroSectionContainer);
-    getContentDiv.appendChild(widgetContainer); 
+    sectionContainer.append(heroSectionContainer, widgetContainer)
+    getContentDiv.appendChild(sectionContainer)
 
 }; 
 
