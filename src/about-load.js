@@ -1,7 +1,7 @@
 import { jupiterIcon, earthIcon, saturnIcon } from "./icons.js"
 import shopAesthetic from "./assets/images/ShopAesthetic.webp"; 
 import dustingCocoa from "./assets/images/DustingCocoa.webp"; 
-import solariasCraft from "./assets/images/SolariasCraft.webp";
+import fruitTopping from "./assets/images/FruitTopping.webp";
 
 function createTextContent(textContentData, sectionContainer) { 
         
@@ -87,7 +87,7 @@ function loadAboutPage() {
             }, craftSection)    
         createCards([
             {
-                imageSrc: solariasCraft, 
+                imageSrc: fruitTopping, 
                 specialClass: "aesthetic-card"
             }
         ], craftSection)    
