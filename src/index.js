@@ -1,17 +1,19 @@
 import "./styles.css"; 
-import { LoadInitialPage } from "./initial-load.js"; 
-import { LoadMenuPage } from "./menu-load.js"; 
-import { LoadAboutPage } from "./about-load.js";
+import { loadInitialPage } from "./initial-load.js"; 
+import { loadMenuPage } from "./menu-load.js"; 
+import { loadAboutPage } from "./about-load.js";
+import { loadContactPage } from "./contact-load.js";
 
-function eventHandlers() { 
+function initRouter() { 
 
-    LoadInitialPage()
+    loadInitialPage()
 
     const getContentDiv = document.getElementById("content"); 
     const getNavLinks = document.querySelector(".link-container"); 
     getNavLinks.addEventListener('click', (e) => { 
         const targetPage = e.target.dataset.page; 
 
+        getContentDiv.innerHTML = "";
         if (e.target.classList.contains('nav-link')) { 
             e.target.closest('.link-container').querySelectorAll('.nav-link').forEach(btn => {btn.classList.remove('active')}); 
             e.target.classList.add('active');
@@ -20,24 +22,24 @@ function eventHandlers() {
         if (!targetPage) return; 
 
         if(targetPage === "home") { 
-            getContentDiv.innerHTML = ""
-            e.target
-            LoadInitialPage()
-        } 
+            loadInitialPage();
+        };
 
         if(targetPage === "menu") { 
-            getContentDiv.innerHTML = ""
-            LoadMenuPage()
-        }
+            loadMenuPage();
+        };
 
         if(targetPage === "about") { 
-            getContentDiv.innerHTML = ""
-            LoadAboutPage()
-        }
+            loadAboutPage();
+        };
+
+        if(targetPage === "contact") { 
+            loadContactPage();
+        };
 
 
     })
 
 }
 
-eventHandlers()
+initRouter()

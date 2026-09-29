@@ -1,6 +1,42 @@
 import DonutImage from "./assets/images/donut-image.png";
 
-function LoadInitialPage() { 
+function createIngredientWidgets(container) { 
+
+    const ingredientData = [ 
+        {
+            headingText: "Stellar Butter", 
+            specialClass: "cookie",
+            para: "Rich European butter folded into delicate layers for an exceptionally rich flavor.", 
+        },
+        { 
+            headingText: "Dawn Baked", 
+            specialClass: "cake", 
+            para: "Prepared at first light so every batch arrives with warm morning crispness.",
+        },
+        { 
+            headingText: "Hand Crafted", 
+            specialClass: "cupcake", 
+            para: "Individually perfected by hand using traditional techniques and premium ingredients.",
+        },
+    ];
+
+    ingredientData.forEach(value => { 
+        const ingredientWidget = document.createElement('div'); 
+        ingredientWidget.className = "ingredients-widget"; 
+
+        const widgetHeading = document.createElement('h1'); 
+        const widgetPara = document.createElement('p'); 
+            
+        widgetHeading.classList.add("ingredient-heading", value.specialClass);
+        widgetHeading.textContent = value.headingText;
+        widgetPara.textContent = value.para; 
+
+        ingredientWidget.append(widgetHeading, widgetPara); 
+        container.appendChild(ingredientWidget)
+    })
+};
+
+function loadInitialPage() { 
 
     const getContentDiv = document.getElementById("content");
     const sectionContainer = document.createElement('div'); 
@@ -22,7 +58,7 @@ function LoadInitialPage() {
     headingOne.textContent = "Taste the";
     headingTwo.textContent = "Solaria Moon";
     heroParagraph.textContent = 
-        "Rich layers, sweet glazes, and fresh-baked favorites ready to make your day."
+        "Rich Textures, Slow-Baked Layers, And A Stellar Sweet Escape Delivered Straight To Your Door."
 
     const donutWrapper = document.createElement("div"); 
     donutWrapper.className = "donut-image";
@@ -39,43 +75,7 @@ function LoadInitialPage() {
     const ingredientsContainer = document.createElement("div"); 
     ingredientsContainer.className = "ingredients-container"; 
 
-    const createIngredientWidgets = () => { 
-
-        const ingredientData = [ 
-            {
-                headingText: "Stellar Butter", 
-                specialClass: "cookie",
-                para: "Premium European butter folded into delicate layers for an exceptionally rich flavor.", 
-            },
-            { 
-                headingText: "Dawn Baked", 
-                specialClass: "cake", 
-                para: "Prepared at first light so every batch reaches your table with morning-fresh warmth and crispness.",
-            },
-            { 
-                headingText: "Hand Crafted", 
-                specialClass: "cupcake", 
-                para: "Individually perfected by hand using traditional techniques and premium ingredients.",
-            },
-        ];
-
-        ingredientData.forEach(value => { 
-            const ingredientWidget = document.createElement('div'); 
-            ingredientWidget.className = "ingredients-widget"; 
-
-            const widgetHeading = document.createElement('h1'); 
-            const widgetPara = document.createElement('p'); 
-            
-            widgetHeading.classList.add("ingredient-heading", value.specialClass);
-            widgetHeading.textContent = value.headingText;
-            widgetPara.textContent = value.para; 
-
-            ingredientWidget.append(widgetHeading, widgetPara); 
-            ingredientsContainer.appendChild(ingredientWidget)
-        })
-    }
-
-    createIngredientWidgets();
+    createIngredientWidgets(ingredientsContainer);
 
     widgetContainer.append(ingredientsContainer);
     sectionContainer.append(heroSectionContainer, widgetContainer)
@@ -83,4 +83,4 @@ function LoadInitialPage() {
 
 }; 
 
-export { LoadInitialPage };
+export { loadInitialPage };

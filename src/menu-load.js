@@ -1,11 +1,21 @@
-import halfDozen from "./assets/images/TheHalfDozen.png";
-import leGouter from "./assets/images/LeGouter.png"; 
-import espressoMacaron from "./assets/images/TheEspressoMacaron.png"; 
-import twoOfAKind from "./assets/images/TwoOfAKind.png"; 
-import obsidianBox from "./assets/images/TheObsidianBox.png"; 
-import romanceBox from "./assets/images/TheRomanceBox.png";  
+import halfDozen from "./assets/images/TheHalfDozen.webp";
+import leGouter from "./assets/images/LeGouter.webp"; 
+import espressoMacaron from "./assets/images/TheEspressoMacaron.webp"; 
+import twoOfAKind from "./assets/images/TwoOfAKind.webp"; 
+import obsidianBox from "./assets/images/TheObsidianBox.webp"; 
+import romanceBox from "./assets/images/TheRomanceBox.webp";  
+import { bagIcon } from "./icons.js";
 
-function LoadMenuPage() { 
+function setupMenuListeners(menuNavWrapper) { 
+    menuNavWrapper.addEventListener('click', (e) => { 
+        if (e.target.classList.contains('menu-link')) { 
+            menuNavWrapper.querySelectorAll('.menu-link').forEach(btn => {btn.classList.remove('active')})
+            e.target.classList.add('active')
+        }
+    })
+}    
+
+function loadMenuPage() { 
 
     const getContentDiv = document.getElementById('content'); 
     const sectionContainer = document.createElement('div');
@@ -39,37 +49,37 @@ function LoadMenuPage() {
     const foodDetails = [
         {
             foodName: "The Half Dozen", 
-            description: "Mix and match any six of our house-baked creations into your own custom box.", 
+            description: "A custom box featuring any six of our freshly house-baked artisanal donuts, loaded with assorted glazes, textures, and toppings.", 
             priceTag: "$16.50", 
             imageSrc: halfDozen, 
         }, 
         {
             foodName: "Le Goûter", 
-            description: "A flaky, freshly baked pastry served with fruit preserves and a rich morning brew.", 
+            description: "A buttery, flaky French croissant served alongside a side of rich fruit preserves, paired with a warm morning coffee.", 
             priceTag: "$7.50", 
             imageSrc: leGouter,             
         }, 
         {
             foodName: "The Espresso Macaron", 
-            description: "An authentic taste of France with Espresso macarons and velvet espresso.", 
+            description: "A delicate plate of sweet French macarons accompanied by a rich, aromatic shot of freshly brewed espresso.", 
             priceTag: "$6.80", 
             imageSrc: espressoMacaron,             
         }, 
         {
             foodName: "Two of a Kind", 
-            description: "A synchronized pairing of any two signature hot brews, crafted for sharing.", 
+            description: "A synchronized pairing of two expertly crafted signature hot lattes featuring delicate heart art, designed specifically for sharing.", 
             priceTag: "$9.00", 
             imageSrc: twoOfAKind,             
         }, 
         {
             foodName: "The Obsidian Box", 
-            description: "Rich, bite-sized chocolate brownies accompanied by a signature beverage of your choice.", 
+            description: "A decadent box of bite-sized dark chocolate brownies served alongside a refreshing iced beverage.", 
             priceTag: "$9.25", 
             imageSrc: obsidianBox,             
         }, 
         {
             foodName: "The Romance Box", 
-            description: "A romantic selection of three handcrafted donuts designed for shared moments.", 
+            description: "A trio of handcrafted, berry-glazed specialty donuts decorated with sweet cream and delicate toppings for shared moments.", 
             priceTag: "$8.50", 
             imageSrc: romanceBox,             
         },
@@ -83,6 +93,7 @@ function LoadMenuPage() {
         foodImageWrapper.className = "food-image"; 
         const foodImage = document.createElement('img'); 
         foodImage.src = value.imageSrc; 
+        foodImage.alt = value.foodName; 
 
         foodImageWrapper.appendChild(foodImage); 
 
@@ -93,10 +104,11 @@ function LoadMenuPage() {
         const ctaWrapper = document.createElement('div'); 
         ctaWrapper.className = "cta-container";  
 
-        const boxHeader = document.createElement('h2'); 
+        const boxHeading = document.createElement('h2'); 
         const boxDescription = document.createElement('p');
+        boxHeading.className = "food-header";
         boxDescription.className = "food-description";  
-        boxHeader.textContent = value.foodName; 
+        boxHeading.textContent = value.foodName; 
         boxDescription.textContent = value.description;
         
         const priceTag = document.createElement('p'); 
@@ -104,14 +116,9 @@ function LoadMenuPage() {
     
         const iconWrapper = document.createElement('div'); 
         iconWrapper.className = "shopping-bag-icon";
-        iconWrapper.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" 
-        viewBox="0 0 24 24" fill="#000000"><g fill="none" stroke="#000000" 
-        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path 
-        d="M12.5 21H8.574a3 3 0 0 1-2.965-2.544l-1.255-8.152A2 2 0 0 1 6.331 
-        8H17.67a2 2 0 0 1 1.977 2.304l-.263 1.708M16 19h6m-3-3v6"/><path 
-        d="M9 11V6a3 3 0 0 1 6 0v5"/></g></svg>`
+        iconWrapper.innerHTML = bagIcon;
 
-        textContentWrapper.append(boxHeader, boxDescription);
+        textContentWrapper.append(boxHeading, boxDescription);
         ctaWrapper.append(priceTag, iconWrapper); 
 
         foodDetailsWrapper.append(textContentWrapper, ctaWrapper);
@@ -121,25 +128,9 @@ function LoadMenuPage() {
     })
 
     sectionContainer.append(menuFilterContainer, foodContainer);
-    getContentDiv.appendChild(sectionContainer)
+    getContentDiv.appendChild(sectionContainer);
 
-    function eventHandlers() { 
-
-        const getMenuNavLinks = document.querySelector('.menu-nav-links');
-        getMenuNavLinks.addEventListener('click', (e) => { 
-
-            if (e.target.classList.contains('menu-link')) { 
-                e.target.closest(".menu-nav-links").querySelectorAll('.menu-link').forEach(btn => {btn.classList.remove('active')})
-                e.target.classList.add('active')
-            }
-
-        })
-
-    }    
-
-    eventHandlers()
-
+    setupMenuListeners(navMenuWrapper);
 }
 
-
-export { LoadMenuPage }
+export { loadMenuPage }
